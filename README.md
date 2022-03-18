@@ -20,10 +20,11 @@ We can then schedule a meeting during any of those available times.
 # Instructions
 
 Given the data in `events.json` and `users.json`, build a script that displays available times
-for a given set of users. For example, your script might be executed like this:
+for a given set of users.
 
 ```
-python availability.py Maggie,Joe,Jordan
+cd cloned_project
+ruby availability.rb Maggie,Joe,Jordan
 ```
 
 and would output something like this:

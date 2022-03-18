@@ -39,7 +39,9 @@ class Availability
         next_blocking = events_on_date.find { |event| DateTime.parse(event["start_time"]) > DateTime.parse(last_event["end_time"]) }
         available_until = next_blocking.nil? ? DateTime.parse(day.strftime("%Y-%m-%d 17:00")) : DateTime.parse(next_blocking["start_time"])
         availabilitys << [last_event["end_time"], available_until]
-        events_processed.concat(events_on_date.filter {|event| DateTime.parse(event["end_time"]) < available_until })
+        previous_events = events_on_date.filter {|event| DateTime.parse(event["end_time"]) < available_until }
+        break unless previous_events.any?
+        events_processed.concat(previous_events)
       end
       availabilitys.each { |a| puts build_time_range(a[0], a[1]) }
       print "\n"
